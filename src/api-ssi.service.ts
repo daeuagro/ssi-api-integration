@@ -9,7 +9,7 @@ export class APISSIService {
 
     baseUrl: string = "https://sandbox-ssi.extrimian.com/v1";
     ws = "https://sandbox-ssi-ws.extrimian.com/";
-    webhook ="https://a5e6-187-184-16-79.ngrok-free.app/webhook";
+    webhook ="https://8a38-201-148-25-74.ngrok-free.app/webhook";
 
     constructor() {}
 
