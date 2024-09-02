@@ -9,14 +9,19 @@ export class APISSIService {
 
     baseUrl: string = "https://sandbox-ssi.extrimian.com/v1";
     ws = "https://sandbox-ssi-ws.extrimian.com/";
-    webhook ="https://39f4-187-184-16-79.ngrok-free.app";
+    webhook ="https://a5e6-187-184-16-79.ngrok-free.app/webhook";
 
     constructor() {}
+
+    async initialize(){
+        // TODO: Implementar la lógica para inicializar el APISSI
+        console.log('APISSI inicializado');
+    }
 
     async createDID(): Promise<{did: string}> {
         const result = await axios.put(`${this.baseUrl}/dids/quarkid`,{
             websocket: this.ws,
-            webhook: this.webhook,
+            webhookURL: this.webhook,
             didMethod: "did:quarkid"
         }).catch((error) => {
             console.error(error);
@@ -38,6 +43,16 @@ export class APISSIService {
                             });
         return result.data;
        
+    }
+
+    async getVerificationCode(body: any): Promise<{invitationId: string, oobContentData: string}> {
+        const result = await axios.put(`${this.baseUrl}/credentialsbbs/waci/oob/presentation`, body)
+        .catch((error) => {
+            console.error(error);
+            return null;
+        });
+        console.log('Resultado de la verificación', result.data);
+        return result.data;
     }
    
 

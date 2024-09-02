@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { CreateCredentialPayload, IssuerService } from './issuer.service';
+import { VerifierService } from './verifier.service';
 
 @Controller("credentials")
 export class CredentialsController {
   
-  constructor(private readonly issuerService: IssuerService) {}
+  constructor(private readonly issuerService: IssuerService, private readonly verificationService: VerifierService) {}
 
   @Get()
   getHello(): string {
@@ -17,4 +18,11 @@ export class CredentialsController {
     console.log("Result de QR: ", result);
     return result;
   }
+
+  @Put()
+  async getVerificationCodeQR(){
+    const result = await this.verificationService.createVerificationQRCode();
+    return result;
+  }
+
 }

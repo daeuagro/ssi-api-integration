@@ -1,0 +1,18 @@
+[
+    {
+        "id": "AlumnoCredential",
+        "name": "AlumnoCredential",
+        "constraints": {
+            "fields": [
+                {
+                    "path": [
+                        "$.credentialSubject.matricula"
+                    ],
+                    "filter": {
+                        "typpe": "string"
+                    }
+                }
+            ]
+        }
+    }
+]

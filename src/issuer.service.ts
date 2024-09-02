@@ -34,6 +34,8 @@ export class IssuerService {
     async createInvitationCode(params: CreateCredentialPayload){
       const credential = this.getCredential(params);
 
+      console.log('Datos decibidos para crear la credencial : ', credential);
+
       const result = {
         did: this.did,
         oneTimeUse: true,
@@ -52,23 +54,31 @@ export class IssuerService {
             "@context": [
               "https://www.w3.org/2018/credentials/v1",
               "https://www.w3.org/2018/credentials/examples/v1",
-              "https://contextvc.blob.core.windows.net/v100/passport.json"
+              {
+                "name": "https://schema.org/Text",
+                "passport": "https://schema.org/Text",
+                "matricula": "https://schema.org/Text",
+                "unidadAcademica": "https://schema.org/Text",
+                "programaEducativo": "https://schema.org/Text",
+                "periodo": "https://schema.org/Text",
+
+                }
             ],
-            "id": (new Date().getTime()).toString(),
-            "type": ["VerifiableCredential", "Alumno"],
-            "issuer": {
-                "id": this.did,
-                "name": "Universidad Autónoma de Guerrero"
+            id: (new Date().getTime()).toString(),
+            type: ["VerifiableCredential", "AlumnoCredential"],
+            issuer: {
+                id: this.did,
+                name: "Universidad Autónoma de Guerrero"
               },
-            "issuanceDate": (new Date()).toString(),
-            "expirationDate": params.vaidTo,
-            "credentialSubject": {
+            issuanceDate: (new Date()).toString(),
+            expirationDate: params.validTo,
+            credentialSubject: {
                 name: params.name,
+                passport: params.passportNumber,
                 matricula: params.matricula,
-                UnidadAcademica: params.unidadAcademica,
-                ProgramaEducativo: params.programaEducativo,
-                validFrom: params.validFrom,
-                vaidTo: params.vaidTo
+                unidadAcademica: params.unidadAcademica,
+                programaEducativo: params.programaEducativo,
+                periodo: `${params.validFrom} - ${params.validTo}`
               }
           }
 
@@ -78,9 +88,10 @@ export class IssuerService {
 
 export class CreateCredentialPayload {
   name: string;
+  passportNumber: string;
   matricula: string;
   unidadAcademica: string;
   programaEducativo: string;
   validFrom: string;
-  vaidTo: string;
+  validTo: string;
 }

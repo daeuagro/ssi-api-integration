@@ -3,6 +3,7 @@ import { CredentialsController } from './app.controller';
 import { IssuerService } from './issuer.service';
 import { DataStorageService } from './data-storage.service';
 import { APISSIService } from './api-ssi.service';
+import { VerifierService } from './verifier.service';
 
 @Module({
   imports: [], 
@@ -10,6 +11,7 @@ import { APISSIService } from './api-ssi.service';
   providers: [
     DataStorageService, 
     APISSIService,
+    VerifierService,
     {
       provide: IssuerService,
       useFactory: async(dds: DataStorageService, apiSSI: APISSIService) => {

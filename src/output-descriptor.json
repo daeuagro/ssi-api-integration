@@ -6,7 +6,7 @@
             "text": "UNIVERSIDAD AUTÓNOMA DE GUERRERO"
         },
         "subtitle": {
-            "text": "Credencial de Alumno"
+            "text": "Credencial del Alumno"
         },
         "description": {
             "text": "Con tu credencial de alumno puedes vizualizar tus documentos emitidos por esta institución"
@@ -21,6 +21,16 @@
                     "type": "string"
                 },
                 "fallback": "Name"
+            },
+            {
+                "label": "Número de pasaporte",
+                "path": [
+                    "$.credentialSubject.passport"
+                ],
+                "schema": {
+                    "type": "string"
+                },
+                "fallback": "Pasaporte"
             },
             {
                 "label": "Número de matricula",
@@ -50,8 +60,19 @@
                 "schema": {
                     "type": "string"
                 },
-                "fallback": "Carrera"
+                "fallback": "Programa Educativo"
+            },
+            {
+                "label": "Período de estadía",
+                "path": [
+                    "$.credentialSubject.periodo"
+                ],
+                "schema": {
+                    "type": "string"
+                },
+                "fallback": "Periodo"
             }
+           
         ]
     },
     "styles": {
